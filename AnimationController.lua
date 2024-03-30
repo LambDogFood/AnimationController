@@ -79,7 +79,7 @@ local function loadAnimation(animator: Animator, animationInfo: AnimationInfo): 
 	if cachedAnimations[animationInfo.ID] then
 		animation = cachedAnimations[animationInfo.ID]
 	else
-		local animation = Instance.new("Animation")
+		animation = Instance.new("Animation")
 		animation.AnimationId = animationInfo.ID
 		cachedAnimations[animationInfo.ID] = animation
 	end
