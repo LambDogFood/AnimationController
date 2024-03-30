@@ -134,7 +134,7 @@ export type AnimationControllerClass = typeof(AnimationController.new(...))
 function AnimationController.NewSequence(self: AnimationControllerClass, sequenceInfo: SequenceInfo)
 	
 	if self._sequences[sequenceInfo.Name] then
-		return warn(`Cannot overwrite existing sequence: {sequenceInfo.Name}`)
+		return warn(`Cannot overwrite existing sequence "{sequenceInfo.Name}"`)
 	end
 	
 	self._sequences[sequenceInfo.Name] = sequenceInfo
@@ -142,12 +142,12 @@ end
 
 function AnimationController.PlaySequence(self: AnimationControllerClass, sequenceName: string, ...)
 	
-	if self._sequences[sequenceName] then
-		return warn(`Could not find sequence of the name {sequenceName}`)
+	if not self._sequences[sequenceName] then
+		return warn(`Could not find sequence "{sequenceName}"`)
 	end
 	
 	if self._activeSequences[sequenceName] then
-		return warn(`Cannot play already playing sequence {sequenceName}`)
+		return warn(`Cannot play already playing sequence "{sequenceName}"`)
 	end
 	
 	local sequenceInfo = self._sequences[sequenceName]
@@ -164,11 +164,11 @@ function AnimationController.Play(self: AnimationControllerClass, animationName:
 	
 	local animationTrack = self._loadedAnimations[animationName]
 	if not animationTrack then
-		return warn(`Animation {animationName} does not exist.`)
+		return warn(`Animation "{animationName}" does not exist.`)
 	end
 	
 	if self._playingAnimations[animationName] then
-		return warn(`Animation {animationName} is already playing.`)
+		return warn(`Animation "{animationName}" is already playing.`)
 	end
 	
 	animationTrack:Play(transitionTime, weight, speed)
